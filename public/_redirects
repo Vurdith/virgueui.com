@@ -1,0 +1,7 @@
+# Redirect apex to www (canonical)
+https://virgueui.com/* https://www.virgueui.com/:splat 301!
+
+# React Router SPA fallback
+/* /index.html 200
+
+
