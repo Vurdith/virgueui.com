@@ -1,14 +1,48 @@
+import { Container, Title, Stack, Group, Text, Anchor, SimpleGrid } from '@mantine/core'
+import GlassPanel from '../components/GlassPanel'
+
 export default function ContactPage() {
+	const email = 'reeceleneveubusiness@gmail.com'
+	const discord = 'virgue_'
+
 	return (
-		<section className="max-w-md space-y-6">
-			<h2 className="text-2xl font-semibold">Contact</h2>
-			<form action="https://formspree.io/f/your-id" method="POST" className="space-y-4">
-				<input name="name" placeholder="Name" className="w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-neutral-100 placeholder-neutral-500" />
-				<input type="email" name="email" placeholder="Email" className="w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-neutral-100 placeholder-neutral-500" />
-				<textarea name="message" placeholder="Message" className="h-32 w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-neutral-100 placeholder-neutral-500" />
-				<button className="rounded-md bg-white px-4 py-2 text-neutral-900">Send</button>
-			</form>
-		</section>
+		<Container size="lg">
+			<Title order={1} ta="center" mb="xs">Let’s build your UI the right way.</Title>
+			<Text ta="center" c="dimmed" mb="xl">Fast replies, clear scopes, and polished delivery. Reach out via email or Discord — whichever you prefer.</Text>
+
+			<SimpleGrid cols={{ base: 1 }} spacing="xl" style={{ alignItems: 'stretch' }}>
+				{/* Contact & instructions */}
+				<GlassPanel>
+					<Stack gap="md">
+						<Group wrap="nowrap" align="center" gap={12}>
+							<span style={{ display:'inline-grid', placeItems:'center', width:36, height:36, borderRadius:8, background:'rgba(255,255,255,.14)', border:'1px solid rgba(255,255,255,.22)' }}>✉️</span>
+							<div>
+								<Text fw={700}>Business Email</Text>
+								<Anchor href={`mailto:${email}`}>{email}</Anchor>
+							</div>
+						</Group>
+
+						<Group wrap="nowrap" align="center" gap={12}>
+							<span style={{ display:'inline-grid', placeItems:'center', width:36, height:36, borderRadius:8, background:'rgba(255,255,255,.14)', border:'1px solid rgba(255,255,255,.22)' }}>💬</span>
+							<div>
+								<Text fw={700}>Discord</Text>
+								<Text>{discord}</Text>
+							</div>
+						</Group>
+					<div style={{ height: 1, background: 'rgba(255,255,255,.12)', margin: '6px 0 2px' }} />
+					<div>
+						<Text fw={700} mb={4}>When you contact me, include:</Text>
+						<ul style={{ margin: 0, paddingLeft: 18, lineHeight: 1.6 }}>
+							<li>What we’re building/making</li>
+							<li>Preferred style (examples or references help)</li>
+							<li>Scope (screens, systems, features)</li>
+							<li>Deadline / timeline</li>
+						</ul>
+					</div>
+					</Stack>
+				</GlassPanel>
+			</SimpleGrid>
+		</Container>
 	)
 }
 
