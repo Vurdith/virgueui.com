@@ -1,6 +1,6 @@
 import { Container, Title, Text, SimpleGrid } from '@mantine/core'
 import { glassLitePanel } from '../styles/glass'
-import { IconSend, IconPencil, IconGift, IconCloud, IconCrown, IconLayoutGrid, IconBolt, IconPalette, IconShieldCheck, IconMathFunction, IconCalculator, IconPercentage, IconChecklist } from '@tabler/icons-react'
+import { IconSend, IconPencil, IconGift, IconCloud, IconCrown, IconLayoutGrid, IconBolt, IconPalette, IconShieldCheck, IconMathFunction, IconCalculator, IconPercentage, IconChecklist, IconStar } from '@tabler/icons-react'
 
 export function OfferingsPage() {
     const offerings = [
@@ -16,7 +16,7 @@ export function OfferingsPage() {
             description: 'High‑quality imports with greyscaling and 1:1 design from file. Reliable, crisp results every time.',
             why: 'Perfect to get art in‑game correctly the first time, faster iteration, fewer errors, cleaner results.',
             icon: <IconCloud size={64} stroke={1.4} />,
-            badge: 'From £4.50 per asset',
+            badge: 'From £3 per asset',
         },
         {
             title: 'Priority Queue',
@@ -111,7 +111,7 @@ export function PricingPage() {
     const tiers = [
         {
             name: 'Tier 1 — Tiny',
-            price: '£5–£12.50 per asset',
+            price: '£5–£12.50 per',
             items: [
                 'Close (X) buttons',
                 'Cooldown indicators',
@@ -119,7 +119,7 @@ export function PricingPage() {
         },
         {
             name: 'Tier 2 — Small',
-            price: '£12.50–£25 per asset',
+            price: '£12.50–£25 per',
             items: [
                 'Toggles',
                 'Sliders',
@@ -131,7 +131,7 @@ export function PricingPage() {
         },
         {
             name: 'Tier 3 — Medium',
-            price: '£35–£75 per asset',
+            price: '£35–£75 per',
             items: [
                 'Health/Mana/XP Bars',
                 'Hotbars / quick‑slots',
@@ -142,7 +142,7 @@ export function PricingPage() {
         },
         {
             name: 'Tier 4 — Large',
-            price: '£75–£150 per asset',
+            price: '£75–£150 per',
             items: [
                 'Full system frames (shop, inventory, settings)',
                 'Leaderboards',
@@ -268,21 +268,21 @@ export function PricingPage() {
                     <div className="card-head">
                         <span className="icon-bubble"><IconCloud size={16} /></span>
                         <Title order={4} m={0}>Tiny</Title>
-                        <span className="badge">£3–£7 per asset</span>
+                        <span className="badge">£3–£7 per</span>
                     </div>
                 </div>
                 <div className="price-card" style={{ ...glassLitePanel }}>
                     <div className="card-head">
                         <span className="icon-bubble"><IconCloud size={16} /></span>
                         <Title order={4} m={0}>Small</Title>
-                        <span className="badge">£7–£14 per asset</span>
+                        <span className="badge">£7–£14 per</span>
                     </div>
                 </div>
                 <div className="price-card" style={{ ...glassLitePanel }}>
                     <div className="card-head">
                         <span className="icon-bubble"><IconCloud size={16} /></span>
                         <Title order={4} m={0}>Medium & Large</Title>
-                        <span className="badge">£14–£26 per asset</span>
+                        <span className="badge">£14–£26 per</span>
                     </div>
                 </div>
             </SimpleGrid>
@@ -328,6 +328,11 @@ export function ProcessPage() {
             description:
                 "You’ll receive your UI in a professional format (.afdesign or other preferred files), fully prepared for development and handoff.",
             icon: <IconGift size={80} stroke={1.4} />,
+        },
+        {
+            title: 'Rating',
+            description: 'If you loved the result, a quick rating or recommendation helps others pick with confidence, totally optional, but appreciated!',
+            icon: <IconStar size={80} stroke={1.4} />,
         },
     ]
 
@@ -401,11 +406,14 @@ export function ProcessPage() {
 
             <style>{`
                 .step-card:hover { transform: translateY(-2px) scale(1.01); box-shadow: 0 18px 45px rgba(0,0,0,0.35); }
-                /* Even alignment across all cells (no vertical staggering) */
+                /* Even alignment across all cells; pull the last (Rating) card to center on large screens */
                 .process-svg { display: none; }
                 @media (min-width: 900px) { .process-svg { display: block; } }
                 .process-path { stroke-dasharray: 6 8; animation: procDash 8s linear infinite; }
                 @keyframes procDash { to { stroke-dashoffset: -140; } }
+                @media (min-width: 900px) {
+                    .step-4 { grid-column: 2; }
+                }
             `}</style>
         </Container>
     )

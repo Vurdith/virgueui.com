@@ -10,13 +10,11 @@ type PortfolioItem = {
 }
 
 const stock = [
-	'https://media.discordapp.net/attachments/1166676527245709382/1248374326994927738/image.png?ex=68a436f1&is=68a2e571&hm=fa8a239493b06a21fda4f376fd20c861f870539ed0f8da09ba13c7732c9f766e&=&format=webp&quality=lossless',
-	'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1920&auto=format&fit=crop',
-	'https://images.unsplash.com/photo-1532993680872-98b088e2cacd?q=80&w=1740&auto=format&fit=crop',
+	'https://media.discordapp.net/attachments/1407100214011101286/1407100251952648295/korriban.png?ex=68a4dfba&is=68a38e3a&hm=a34d3331a55c39f3a01835435929352e57851040aba7fcbec09fd9f55a39acf9&=&format=webp&quality=lossless&width=2162&height=1216',
 ]
 
 const items: PortfolioItem[] = [
-	{ name: 'Solo-Leveling UI', description: 'Solo-Leveling Inspired UI with a HUD and some frames.', imageUrl: stock[0], images: [stock[0]] },
+	{ name: 'Star Wars UI', description: 'Star Wars Inspired UI with a HUD and an information frame.', imageUrl: stock[0], images: [stock[0]] },
 ]
 
 export default function PortfolioPage() {
@@ -24,6 +22,7 @@ export default function PortfolioPage() {
 	const [active, setActive] = useState<PortfolioItem | null>(null)
 	const [imgIdx, setImgIdx] = useState(0)
 	const [dir, setDir] = useState<'left' | 'right'>('right')
+	const [fullscreen, setFullscreen] = useState(false)
 
 	useEffect(() => {
 		if (!active || !active.images || active.images.length <= 1) return
@@ -84,6 +83,7 @@ export default function PortfolioPage() {
 					body: 'modal-body',
 					content: 'modal-content',
 				}}
+				style={{ opacity: fullscreen ? 0 : 1, pointerEvents: fullscreen ? 'none' : 'auto' }}
 				styles={{
 					title: { color: '#ffffff', fontWeight: 700, transform: 'translateY(6px)' },
 					header: {
@@ -107,16 +107,16 @@ export default function PortfolioPage() {
 						transform: 'translateZ(0)'
 					},
 					close: {
-						background: 'rgba(255,255,255,0.10)',
-						border: '1px solid rgba(255,255,255,0.20)',
+						background: 'rgba(255,255,255,0.12)',
+						border: '1px solid rgba(255,255,255,0.28)',
 						color: '#fff',
 						borderRadius: 9999,
 						display: 'flex',
 						alignItems: 'center',
 						justifyContent: 'center',
 						lineHeight: 1,
-						width: 32,
-						height: 32,
+						width: 36,
+						height: 36,
 						boxShadow: '0 3px 14px rgba(0,0,0,.20)',
 						transform: 'translateY(6px)'
 					},
@@ -124,7 +124,17 @@ export default function PortfolioPage() {
 			>
 				{active && (
 					<div style={{ borderRadius: 12, overflow: 'hidden', background: 'rgba(0,0,0,0.12)', marginBottom: 16, position: 'relative' }}>
-						<Image key={imgIdx + (dir === 'right' ? '-r' : '-l')} src={(active.images ?? [active.imageUrl])[imgIdx]} alt={active.name} radius={12} className={dir === 'right' ? 'swoosh-right' : 'swoosh-left'} style={{ display: 'block', width: '100%', maxHeight: '56vh', objectFit: 'contain' }} loading="eager" decoding="async" />
+						<Image
+							key={imgIdx + (dir === 'right' ? '-r' : '-l')}
+							src={(active.images ?? [active.imageUrl])[imgIdx]}
+							alt={active.name}
+							radius={12}
+							className={dir === 'right' ? 'swoosh-right' : 'swoosh-left'}
+							style={{ display: 'block', width: '100%', maxHeight: '56vh', objectFit: 'contain', cursor: 'zoom-in' }}
+							loading="eager"
+							decoding="async"
+							onClick={() => setFullscreen(true)}
+						/>
 						{(active.images && active.images.length > 1) && (
 							<>
 								<button className="modal-nav-btn left" aria-label="Previous" onClick={() => { if (!active.images) return; setDir('left'); setImgIdx((imgIdx - 1 + active.images.length) % active.images.length) }}>‹</button>
@@ -137,6 +147,14 @@ export default function PortfolioPage() {
 					<Text mt="md" c="dimmed">{active.description}</Text>
 				)}
 			</Modal>
+
+			{/* fullscreen overlay */}
+			{fullscreen && active && (
+				<div onClick={() => setFullscreen(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,.92)', zIndex: 999999, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'zoom-out' }}>
+					<img src={(active.images ?? [active.imageUrl])[imgIdx]} alt={active.name} style={{ maxWidth: '94vw', maxHeight: '94vh', objectFit: 'contain', boxShadow: '0 40px 120px rgba(0,0,0,.65)', borderRadius: 12 }} />
+					<button aria-label="Close fullscreen" onClick={(e) => { e.stopPropagation(); setFullscreen(false) }} style={{ position: 'fixed', top: 16, right: 16, width: 36, height: 36, borderRadius: 9999, border: '1px solid rgba(255,255,255,.28)', background: 'rgba(255,255,255,.12)', color: '#fff', zIndex: 1000000 }}>×</button>
+				</div>
+			)}
 		</Container>
 	)
 }
