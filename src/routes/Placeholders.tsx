@@ -292,7 +292,7 @@ export function PricingPage() {
                 .price-card:hover { transform: translateY(-3px); box-shadow: 0 22px 55px rgba(0,0,0,.38); }
                 .price-card.span-2 { grid-column: span 2; }
                 .price-card.span-3 { grid-column: span 3; }
-                .card-head { display:flex; align-items:center; gap:10px; min-width:0; }
+                .card-head { display:flex; align-items:center; gap:10px; }
                 .icon-bubble { display:inline-grid; place-items:center; width:28px; height:28px; border-radius:8px; background: rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); font-size:14px; }
                 .badge { margin-left:auto; font-size:12px; padding:4px 10px; border-radius:9999px; background: rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); }
                 .tier-card { position: relative; }
@@ -304,12 +304,6 @@ export function PricingPage() {
                 .discounts { display: grid; grid-template-columns: 1fr auto; gap: 10px 18px; }
                 .discount-row { display: contents; }
                 .panel-head .head-icon { display:inline-grid; place-items:center; width:28px; height:28px; border-radius:8px; background: rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); font-size:14px; }
-                @media (max-width: 899px) {
-                  .price-card.span-2, .price-card.span-3 { grid-column: span 1; }
-                  .card-head { flex-wrap: wrap; row-gap: 6px; }
-                  .card-head .mantine-Title-root { min-width: 0; word-break: break-word; }
-                  .card-head .badge { margin-left: 0; }
-                }
             `}</style>
         </Container>
     )

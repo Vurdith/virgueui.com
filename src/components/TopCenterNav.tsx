@@ -15,11 +15,8 @@ const navStyle: CSSProperties = {
 	display: 'flex',
 	gap: 16,
 	alignItems: 'center',
-	flexWrap: 'nowrap',
+	flexWrap: 'wrap',
 	maxWidth: 'min(100vw - 16px, 1200px)',
-	overflowX: 'auto',
-	overflowY: 'hidden',
-	WebkitOverflowScrolling: 'touch',
     boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.12), 0 12px 30px rgba(0,0,0,0.25)'
 }
 
@@ -34,7 +31,6 @@ const linkStyle = (isActive: boolean): CSSProperties => ({
 		: glassPill.boxShadow,
 	position: 'relative',
 	overflow: 'hidden',
-	whiteSpace: 'nowrap',
 	willChange: 'transform',
 	transition: 'transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms ease, background 220ms ease, color 220ms ease',
 	transform: 'translateZ(0)',
@@ -42,8 +38,8 @@ const linkStyle = (isActive: boolean): CSSProperties => ({
 
 const circleStyle = (isActive: boolean): CSSProperties => ({
 	...glassPill,
-	width: 'clamp(44px, 14vw, 56px)',
-	height: 'clamp(44px, 14vw, 56px)',
+	width: 56,
+	height: 56,
 	borderRadius: 9999,
 	padding: 0,
 	display: 'inline-flex',
@@ -109,7 +105,7 @@ export default function TopCenterNav() {
 	const VIZ_BARS = 32
 
 	return (
-		<nav id="top-center-nav" style={navStyle} ref={navRef}>
+		<nav style={navStyle} ref={navRef}>
 			{/* fairy orb with curved path */}
 			<span ref={orbRef} className="pointer-events-none" style={{
 				position: 'absolute', left: '50%', top: '50%',
@@ -119,8 +115,7 @@ export default function TopCenterNav() {
 				boxShadow: '0 0 24px 10px rgba(167,139,250,0.55)',
 			}} />
 			{/* energy border (stronger and visible) */}
-			<span className="pointer-events-none" style={{
-				position: 'absolute', left: 0, right: 0, top: 0, bottom: 0,
+			<span className="pointer-events-none absolute -inset-1" style={{
 				borderRadius: 9999,
 				background: 'conic-gradient(from 0deg, rgba(192,132,252,.0) 0deg, rgba(192,132,252,.55) 120deg, rgba(192,132,252,.0) 300deg)',
 				animation: 'spin 5s linear infinite',
@@ -229,9 +224,6 @@ export default function TopCenterNav() {
 				</NavLink>
 			))}
 			<style>{`
-			/* Hide scrollbars but keep horizontal scroll */
-			#top-center-nav { scrollbar-width: none; }
-			#top-center-nav::-webkit-scrollbar { display: none; height: 0; width: 0; }
 			.nav-pill { transform: translateZ(0); transition: transform 240ms cubic-bezier(.2,.8,.2,1); will-change: transform; }
 			.nav-pill:hover { animation: pulseScale 1.4s ease-in-out infinite; }
 			.nav-pill:active { transform: translateZ(0) scale(.98); }
@@ -288,11 +280,11 @@ export default function TopCenterNav() {
 
 			/* Responsive nav: compress spacing and sizes on small screens */
 			@media (max-width: 640px) {
-			  #top-center-nav { left: 50%; transform: translateX(-50%) scale(.92); gap: 10px; padding: 8px 12px; }
+			  nav[style] { left: 50%; transform: translateX(-50%) scale(.92); gap: 10px; padding: 8px 12px; }
 			  .nav-pill { font-size: 13px; padding: 8px 12px; }
 			}
 			@media (max-width: 480px) {
-			  #top-center-nav { transform: translateX(-50%) scale(.86); gap: 8px; padding: 8px 10px; }
+			  nav[style] { transform: translateX(-50%) scale(.86); gap: 8px; padding: 8px 10px; }
 			  .nav-pill { font-size: 12px; padding: 7px 10px; }
 			}
 			`}</style>

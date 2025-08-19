@@ -93,9 +93,15 @@ export default function HomePage() {
 				.side-col.left { left: 0; padding-left: 18px; }
 				.side-col.right { right: 0; padding-right: 18px; }
 				.col-mask { position: absolute; inset: 0; overflow: hidden; }
-				.col-track { position: absolute; top: 0; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; gap: 22px; animation: colScroll var(--dur, 55s) linear infinite; will-change: transform; content-visibility: auto; }
+				.col-track { position: absolute; top: 0; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; gap: 22px; animation: colScroll var(--dur, 55s) linear infinite; will-change: transform; }
 				.col-track.reverse { animation-direction: reverse; }
 				@keyframes colScroll { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+
+				/* Mobile adjustments: shrink width, speed, and ensure both sides run */
+				@media (max-width: 640px) {
+					.side-col { width: 64px; }
+					.col-track { gap: 18px; animation-duration: 45s; }
+				}
 
 				.app-bubble { width: 50px; height: 50px; border-radius: 14px; display: grid; place-items: center; font-weight: 700; color: #fff; font-size: 16px; letter-spacing: .5px; background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)), radial-gradient(circle at 30% 30%, var(--col, #a78bfa), transparent 65%); border: 1px solid rgba(255,255,255,.18); box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 12px 30px rgba(0,0,0,.25); }
 				.app-img { width: 28px; height: 28px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,.35)); }
