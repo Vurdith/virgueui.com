@@ -5,6 +5,8 @@
 /* App background with soft gradients for glassmorphism */
 html, body {
   min-height: 100%;
+  /* Prevent layout zoom artifacts by using dynamic viewport units */
+  height: 100dvh;
 }
 
 /* Text readability and stacking */
@@ -48,6 +50,18 @@ p, span, a, li, label, button, small, strong, em {
     radial-gradient(900px 520px at 85% 0%, rgba(0,172,255,0.28), transparent 55%),
     radial-gradient(700px 460px at 50% 100%, rgba(56,189,248,0.22), transparent 60%),
     #0a0a0a;
+}
+
+/* Global responsive typography and container scaling */
+:root {
+  --scale-sm: 0.94;
+  --scale-xs: 0.90;
+}
+@media (max-width: 640px) {
+  .responsive-text { font-size: calc(1rem * var(--scale-sm)); }
+}
+@media (max-width: 480px) {
+  .responsive-text { font-size: calc(1rem * var(--scale-xs)); }
 }
 
 .glass {

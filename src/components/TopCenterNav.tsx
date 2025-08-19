@@ -15,6 +15,8 @@ const navStyle: CSSProperties = {
 	display: 'flex',
 	gap: 16,
 	alignItems: 'center',
+	flexWrap: 'wrap',
+	maxWidth: 'min(100vw - 16px, 1200px)',
     boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.12), 0 12px 30px rgba(0,0,0,0.25)'
 }
 
@@ -275,6 +277,16 @@ export default function TopCenterNav() {
 			/* Active shadow overlay sits above visualizer */
 			.viz-shadow-top { position:absolute; inset:0; border-radius:9999px; box-shadow: 0 0 0 1px rgba(255,255,255,0.30), 0 10px 28px rgba(0,0,0,0.50), 0 0 32px rgba(167,139,250,0.65); opacity:0; transition:opacity .2s; z-index: 4; }
 			.nav-pill.active .viz-shadow-top { opacity: 1; }
+
+			/* Responsive nav: compress spacing and sizes on small screens */
+			@media (max-width: 640px) {
+			  nav[style] { left: 50%; transform: translateX(-50%) scale(.92); gap: 10px; padding: 8px 12px; }
+			  .nav-pill { font-size: 13px; padding: 8px 12px; }
+			}
+			@media (max-width: 480px) {
+			  nav[style] { transform: translateX(-50%) scale(.86); gap: 8px; padding: 8px 10px; }
+			  .nav-pill { font-size: 12px; padding: 7px 10px; }
+			}
 			`}</style>
 		</nav>
 	)

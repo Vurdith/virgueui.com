@@ -45,7 +45,8 @@ function seedShapes(count: number, width: number, height: number) {
 
 function resize(width: number, height: number, dpr: number) {
 	if (!canvas || !ctx) return
-	DPR = Math.min(dpr || 1, 2)
+	// Cap DPR to 2 to prevent extreme zoom distortion / GPU overuse
+	DPR = Math.min(Math.max(dpr || 1, 1), 2)
 	canvas.width = Math.floor(width * DPR)
 	canvas.height = Math.floor(height * DPR)
 	ctx.setTransform(DPR, 0, 0, DPR, 0, 0)
