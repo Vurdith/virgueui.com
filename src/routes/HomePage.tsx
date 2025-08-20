@@ -10,7 +10,7 @@ export default function HomePage() {
 		{ label: 'Fg', color: '#A259FF', src: '/apps/figma.png' },
 		{ label: 'Ai', color: '#FF7F18', src: '/apps/illustrator.png' },
 	]
-	const REPEAT = 8
+	const REPEAT = 6
 	const apps = Array.from({ length: REPEAT }, () => baseApps).flat()
 	const loop = [...apps, ...apps]
 

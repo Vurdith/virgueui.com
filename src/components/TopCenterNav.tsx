@@ -81,12 +81,16 @@ export default function TopCenterNav() {
 		let t = Math.random() * Math.PI * 2
 		let raf = 0
 		let last: number | null = null
+		let rect = nav.getBoundingClientRect()
 		const speed = 0.6 // radians per second (time-based)
+		const ro = new ResizeObserver(() => { rect = nav.getBoundingClientRect() })
+		ro.observe(nav)
 		function step(now: number) {
 			if (last === null) last = now
-			const dt = (now - last) / 1000
+			const dtMs = now - last
+			if (dtMs < 16) { raf = requestAnimationFrame(step); return }
+			const dt = dtMs / 1000
 			last = now
-			const rect = (nav as HTMLDivElement).getBoundingClientRect()
 			const rx = rect.width / 2 + 10
 			const ry = rect.height / 2 + 10
 			// curved, lively path using multiple frequencies
@@ -100,10 +104,10 @@ export default function TopCenterNav() {
 			raf = requestAnimationFrame(step)
 		}
 		raf = requestAnimationFrame(step)
-		return () => cancelAnimationFrame(raf)
+		return () => { cancelAnimationFrame(raf); ro.disconnect() }
 	}, [])
 
-	const VIZ_BARS = 32
+	const VIZ_BARS = 28
 
 	// Return an appropriate icon for each route (used on mobile-only)
 	const iconFor = (to: string) => {
