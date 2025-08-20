@@ -13,9 +13,7 @@ export const glassBase: CSSProperties = {
 
 export const glassPill: CSSProperties = {
 	...glassBase,
-	padding: '6px 12px',
 	borderRadius: 9999,
-	fontSize: '11px',
 }
 
 export const glassPanel: CSSProperties = {

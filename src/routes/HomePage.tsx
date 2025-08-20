@@ -55,16 +55,16 @@ export default function HomePage() {
 						position: 'absolute', inset: 38, borderRadius: 9999,
 						padding: 2,
 						background: 'conic-gradient(from 0deg, #c4b5fd, #a78bfa, #7c3aed, #c4b5fd)',
-						animation: 'spin 5s linear infinite',
-						WebkitMask: 'radial-gradient(farthest-side, transparent calc(100% - 3px), black 0)',
-						mask: 'radial-gradient(farthest-side, transparent calc(100% - 3px), black 0)',
+						animation: 'spin 3.5s linear infinite',
+						WebkitMask: 'radial-gradient(farthest-side, transparent calc(100% - 4px), black 0)',
+						mask: 'radial-gradient(farthest-side, transparent calc(100% - 4px), black 0)',
 						zIndex: 1,
 					}} />
 					{/* subtle pulse ring */}
 					<span className="pointer-events-none" style={{
 						position: 'absolute', inset: 38, borderRadius: 9999,
-						boxShadow: '0 0 0 0 rgba(255,255,255,0.35)',
-						animation: 'pulseRing 2.4s ease-out infinite',
+						boxShadow: '0 0 0 0 rgba(255,255,255,0.5)',
+						animation: 'pulseRing 2s ease-out infinite',
 						zIndex: 1,
 					}} />
 				</div>

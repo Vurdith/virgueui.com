@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import type { CSSProperties } from 'react'
 import { useEffect, useRef } from 'react'
 import { glassBase, glassPill } from '../styles/glass'
+import { IconBriefcase, IconRoute, IconBulb, IconLayoutGrid, IconCurrencyPound, IconMail } from '@tabler/icons-react'
 
 const navStyle: CSSProperties = {
 	...glassBase,
@@ -15,7 +16,7 @@ const navStyle: CSSProperties = {
 	display: 'flex',
 	gap: 16,
 	alignItems: 'center',
-	flexWrap: 'wrap',
+	flexWrap: 'nowrap',
 	maxWidth: 'min(100vw - 16px, 1200px)',
     boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.12), 0 12px 30px rgba(0,0,0,0.25)'
 }
@@ -104,8 +105,21 @@ export default function TopCenterNav() {
 
 	const VIZ_BARS = 32
 
+	// Return an appropriate icon for each route (used on mobile-only)
+	const iconFor = (to: string) => {
+		switch (to) {
+			case '/portfolio': return <IconBriefcase size={18} />
+			case '/process': return <IconRoute size={18} />
+			case '/skills': return <IconBulb size={18} />
+			case '/offerings': return <IconLayoutGrid size={18} />
+			case '/pricing': return <IconCurrencyPound size={18} />
+			case '/contact': return <IconMail size={18} />
+			default: return null
+		}
+	}
+
 	return (
-		<nav style={navStyle} ref={navRef}>
+		<nav style={navStyle} ref={navRef} className="tc-nav">
 			{/* fairy orb with curved path */}
 			<span ref={orbRef} className="pointer-events-none" style={{
 				position: 'absolute', left: '50%', top: '50%',
@@ -118,7 +132,7 @@ export default function TopCenterNav() {
 			<span className="pointer-events-none absolute -inset-1" style={{
 				borderRadius: 9999,
 				background: 'conic-gradient(from 0deg, rgba(192,132,252,.0) 0deg, rgba(192,132,252,.55) 120deg, rgba(192,132,252,.0) 300deg)',
-				animation: 'spin 5s linear infinite',
+				animation: 'spin 3.5s linear infinite',
 				filter: 'blur(4px) saturate(140%)',
 				mixBlendMode: 'screen',
 				opacity: .9,
@@ -128,8 +142,9 @@ export default function TopCenterNav() {
 				boxShadow: '0 0 40px 10px rgba(167,139,250,0.35) inset, 0 0 18px rgba(167,139,250,0.45)',
 			}} />
 			{leftItems.map((it) => (
-				<NavLink key={it.to} to={it.to} style={({ isActive }) => linkStyle(isActive)} className="nav-pill">
-					<span style={{ position: 'relative', zIndex: 2 }}>{it.label}</span>
+				<NavLink key={it.to} to={it.to} style={({ isActive }) => linkStyle(isActive)} className={({ isActive }) => `nav-pill ${isActive ? 'active' : ''}`}>
+					<span className="nav-icon" aria-hidden style={{ position: 'relative', zIndex: 2 }}>{iconFor(it.to)}</span>
+					<span className="nav-label" style={{ position: 'relative', zIndex: 2 }}>{it.label}</span>
 					{/* animated pulse ring */}
 					<span className="pointer-events-none absolute inset-0" style={{
 						borderRadius: 9999,
@@ -140,11 +155,11 @@ export default function TopCenterNav() {
 					{/* rotating gradient border */}
 					<span className="pointer-events-none absolute inset-0" style={{
 						borderRadius: 9999,
-						padding: 1,
+						padding: 2,
 						background: 'conic-gradient(from 0deg, #c4b5fd, #a78bfa, #7c3aed, #c4b5fd)',
-						animation: 'spin 4s linear infinite',
-						WebkitMask: 'radial-gradient(farthest-side, transparent calc(100% - 2px), black 0)',
-						mask: 'radial-gradient(farthest-side, transparent calc(100% - 2px), black 0)',
+						animation: 'spin 3s linear infinite',
+						WebkitMask: 'radial-gradient(farthest-side, transparent calc(100% - 3px), black 0)',
+						mask: 'radial-gradient(farthest-side, transparent calc(100% - 3px), black 0)',
 						zIndex: 0,
 					}} />
 					{/* hover ripple */}
@@ -160,7 +175,7 @@ export default function TopCenterNav() {
 			<NavLink
 				to="/"
 				style={({ isActive }) => ({ ...circleStyle(isActive), overflow: 'visible' })}
-				className={({ isActive }) => `nav-pill ${isActive ? 'active' : ''}`}
+				className={({ isActive }) => `nav-pill home-circle ${isActive ? 'active' : ''}`}
 				aria-label="Home"
 			>
 				{/* faux audio bars extruding from center */}
@@ -180,11 +195,11 @@ export default function TopCenterNav() {
 				{/* rotating gradient border ring above bars */}
 				<span className="pointer-events-none absolute inset-0" style={{
 					borderRadius: 9999,
-					padding: 1,
+					padding: 2,
 					background: 'conic-gradient(from 0deg, #c4b5fd, #a78bfa, #7c3aed, #c4b5fd)',
-					animation: 'spin 4s linear infinite',
-					WebkitMask: 'radial-gradient(farthest-side, transparent calc(100% - 2px), black 0)',
-					mask: 'radial-gradient(farthest-side, transparent calc(100% - 2px), black 0)',
+					animation: 'spin 3s linear infinite',
+					WebkitMask: 'radial-gradient(farthest-side, transparent calc(100% - 3px), black 0)',
+					mask: 'radial-gradient(farthest-side, transparent calc(100% - 3px), black 0)',
 					zIndex: 4,
 				}} />
 				{/* subtle pulse ring */}
@@ -198,8 +213,9 @@ export default function TopCenterNav() {
 				<span className="viz-shadow-top pointer-events-none" />
 			</NavLink>
 			{rightItems.map((it) => (
-				<NavLink key={it.to} to={it.to} style={({ isActive }) => linkStyle(isActive)} className="nav-pill">
-					<span style={{ position: 'relative', zIndex: 2 }}>{it.label}</span>
+				<NavLink key={it.to} to={it.to} style={({ isActive }) => linkStyle(isActive)} className={({ isActive }) => `nav-pill ${isActive ? 'active' : ''}`}>
+					<span className="nav-icon" aria-hidden style={{ position: 'relative', zIndex: 2 }}>{iconFor(it.to)}</span>
+					<span className="nav-label" style={{ position: 'relative', zIndex: 2 }}>{it.label}</span>
 					<span className="pointer-events-none absolute inset-0" style={{
 						borderRadius: 9999,
 						boxShadow: '0 0 0 0 rgba(255,255,255,0.35)',
@@ -208,11 +224,11 @@ export default function TopCenterNav() {
 					}} />
 					<span className="pointer-events-none absolute inset-0" style={{
 						borderRadius: 9999,
-						padding: 1,
+						padding: 2,
 						background: 'conic-gradient(from 0deg, #c4b5fd, #a78bfa, #7c3aed, #c4b5fd)',
-						animation: 'spin 4s linear infinite',
-						WebkitMask: 'radial-gradient(farthest-side, transparent calc(100% - 2px), black 0)',
-						mask: 'radial-gradient(farthest-side, transparent calc(100% - 2px), black 0)',
+						animation: 'spin 3s linear infinite',
+						WebkitMask: 'radial-gradient(farthest-side, transparent calc(100% - 3px), black 0)',
+						mask: 'radial-gradient(farthest-side, transparent calc(100% - 3px), black 0)',
 						zIndex: 0,
 					}} />
 					<span className="pointer-events-none absolute left-1/2 top-1/2" style={{
@@ -224,12 +240,19 @@ export default function TopCenterNav() {
 				</NavLink>
 			))}
 			<style>{`
+			/* base nav pill sizing set here (CSS, not inline) so media queries can override */
+			.tc-nav .nav-pill { font-size: 11px; padding: 6px 12px; flex: 0 0 auto; }
+			.nav-icon { display: none; }
+			.nav-label { display: inline; }
 			.nav-pill { transform: translateZ(0); transition: transform 240ms cubic-bezier(.2,.8,.2,1); will-change: transform; }
-			.nav-pill:hover { animation: pulseScale 1.4s ease-in-out infinite; }
+			.nav-pill:hover,
+			.nav-pill.active,
+			.nav-pill[aria-current="page"],
+			.nav-pill:focus-visible { animation: pulseScale 1.4s ease-in-out infinite; }
 			.nav-pill:active { transform: translateZ(0) scale(.98); }
 			@keyframes pulseRing {
-				0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.35); }
-				70% { box-shadow: 0 0 0 10px rgba(255,255,255,0); }
+				0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.5); }
+				70% { box-shadow: 0 0 0 16px rgba(255,255,255,0); }
 				100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
 			}
 			@keyframes burst {
@@ -280,12 +303,20 @@ export default function TopCenterNav() {
 
 			/* Responsive nav: compress spacing and sizes on small screens */
 			@media (max-width: 640px) {
-			  nav[style] { left: 50%; transform: translateX(-50%) scale(.92); gap: 10px; padding: 8px 12px; }
-			  .nav-pill { font-size: 13px; padding: 8px 12px; }
+			  .tc-nav { gap: 8px; padding: 6px 10px; }
+			  .tc-nav .nav-pill { font-size: 0; padding: 6px; width: 36px; height: 36px; border-radius: 9999px; }
+			  .nav-icon { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; }
+			  .nav-label { display: none; }
+			  .home-circle { width: 48px !important; height: 48px !important; }
+			  .home-circle img { width: 38px !important; height: 38px !important; }
+			  .home-circle .viz-bar { width: 3px; height: 12px; transform: translate(-50%,-50%) rotate(var(--a)) translateY(-16px) scaleY(1); }
 			}
 			@media (max-width: 480px) {
-			  nav[style] { transform: translateX(-50%) scale(.86); gap: 8px; padding: 8px 10px; }
-			  .nav-pill { font-size: 12px; padding: 7px 10px; }
+			  .tc-nav { gap: 4px; padding: 4px 8px; }
+			  .tc-nav .nav-pill { width: 34px; height: 34px; padding: 6px; }
+			  .home-circle { width: 44px !important; height: 44px !important; }
+			  .home-circle img { width: 34px !important; height: 34px !important; }
+			  .home-circle .viz-bar { width: 2px; height: 10px; transform: translate(-50%,-50%) rotate(var(--a)) translateY(-14px) scaleY(1); }
 			}
 			`}</style>
 		</nav>

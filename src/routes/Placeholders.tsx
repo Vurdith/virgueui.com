@@ -304,6 +304,16 @@ export function PricingPage() {
                 .discounts { display: grid; grid-template-columns: 1fr auto; gap: 10px 18px; }
                 .discount-row { display: contents; }
                 .panel-head .head-icon { display:inline-grid; place-items:center; width:28px; height:28px; border-radius:8px; background: rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); font-size:14px; }
+
+                /* Mobile adjustments to prevent overflow and tighten spacing */
+                @media (max-width: 700px) {
+                    .price-card { padding: 14px; }
+                    .price-card.span-2, .price-card.span-3 { grid-column: span 1; }
+                    .card-head { gap: 8px; }
+                    .icon-bubble { width:24px; height:24px; font-size:12px; }
+                    .badge { font-size:11px; padding:3px 8px; }
+                    .discounts { gap: 8px 14px; }
+                }
             `}</style>
         </Container>
     )
@@ -359,6 +369,8 @@ export function ProcessPage() {
                     </defs>
                     <path d="M 12 22 C 24 8, 38 8, 50 22" fill="none" stroke="url(#procGrad)" strokeWidth="0.6" strokeLinecap="round" className="process-path" />
                     <path d="M 50 22 C 62 34, 76 34, 88 22" fill="none" stroke="url(#procGrad)" strokeWidth="0.6" strokeLinecap="round" className="process-path" />
+                    {/* Circular marching-ants path around Rating step (shifted down and larger) */}
+                    <circle cx="50" cy="28" r="8" fill="none" stroke="url(#procGrad)" strokeWidth="0.8" className="process-path" />
                 </svg>
 
                 <SimpleGrid cols={{ base: 1, md: 3 }} spacing="xl" style={{ alignItems: 'stretch', gridAutoRows: '1fr' }}>
