@@ -59,10 +59,6 @@ export default function PortfolioPage() {
 				.modal-nav-btn.left { left:10px }
 				.modal-nav-btn.right { right:10px }
 				.modal-nav-btn:hover { background:rgba(255,255,255,.2); border-color:rgba(255,255,255,.35) }
-				/* Force X text inside close button and center it */
-				.modal-close { display:flex; align-items:center; justify-content:center; position:relative }
-				.modal-close svg { display:none }
-				.modal-close::before { content:'X'; font-weight:800; font-size:14px; color:#ffffff; text-shadow: 0 1px 4px rgba(0,0,0,.45), 0 0 5px rgba(0,0,0,.3); line-height:1 }
 				`}</style>
 			</SimpleGrid>
 
@@ -76,8 +72,8 @@ export default function PortfolioPage() {
 				lockScroll={false}
 				keepMounted={false}
 				yOffset="140px"
+				closeButtonProps={{ display: 'none' as unknown as string }}
 				classNames={{
-					close: 'modal-close',
 					header: 'modal-header',
 					title: 'modal-title',
 					body: 'modal-body',
@@ -105,20 +101,6 @@ export default function PortfolioPage() {
 						overflow: 'hidden',
 						willChange: 'transform',
 						transform: 'translateZ(0)'
-					},
-					close: {
-						background: 'rgba(255,255,255,0.12)',
-						border: '1px solid rgba(255,255,255,0.28)',
-						color: '#fff',
-						borderRadius: 9999,
-						display: 'flex',
-						alignItems: 'center',
-						justifyContent: 'center',
-						lineHeight: 1,
-						width: 36,
-						height: 36,
-						boxShadow: '0 3px 14px rgba(0,0,0,.20)',
-						transform: 'translateY(6px)'
 					},
 				}}
 			>
@@ -152,7 +134,6 @@ export default function PortfolioPage() {
 			{fullscreen && active && (
 				<div onClick={() => setFullscreen(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,.92)', zIndex: 999999, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'zoom-out' }}>
 					<img src={(active.images ?? [active.imageUrl])[imgIdx]} alt={active.name} style={{ maxWidth: '94vw', maxHeight: '94vh', objectFit: 'contain', boxShadow: '0 40px 120px rgba(0,0,0,.65)', borderRadius: 12 }} />
-					<button aria-label="Close fullscreen" onClick={(e) => { e.stopPropagation(); setFullscreen(false) }} style={{ position: 'fixed', top: 16, right: 16, width: 36, height: 36, borderRadius: 9999, border: '1px solid rgba(255,255,255,.28)', background: 'rgba(255,255,255,.12)', color: '#fff', zIndex: 1000000 }}>×</button>
 				</div>
 			)}
 		</Container>
