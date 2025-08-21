@@ -1,6 +1,6 @@
 import { Container, Title, Text, SimpleGrid } from '@mantine/core'
 import { glassLitePanel } from '../styles/glass'
-import { IconSend, IconPencil, IconGift, IconCloud, IconCrown, IconLayoutGrid, IconBolt, IconPalette, IconShieldCheck, IconMathFunction, IconCalculator, IconPercentage, IconChecklist, IconStar } from '@tabler/icons-react'
+import { IconSend, IconPencil, IconGift, IconCloud, IconCrown, IconLayoutGrid, IconBolt, IconPalette, IconShieldCheck, IconPercentage, IconChecklist, IconStar, IconCreditCard } from '@tabler/icons-react'
 
 export function OfferingsPage() {
     const offerings = [
@@ -9,14 +9,14 @@ export function OfferingsPage() {
             description: 'Clean, modern UI tailored to your game’s style. Wireframes → polished visuals with any style UI choice.',
             why: 'Useful when you need consistent, beautiful interfaces that guide players effortlessly and boost engagement.',
             icon: <IconLayoutGrid size={64} stroke={1.4} />,
-            badge: 'From £7.50 per asset',
+            badge: '£10–£150 per task',
         },
         {
             title: 'Roblox Importing',
             description: 'High‑quality imports with greyscaling and 1:1 design from file. Reliable, crisp results every time.',
             why: 'Perfect to get art in‑game correctly the first time, faster iteration, fewer errors, cleaner results.',
             icon: <IconCloud size={64} stroke={1.4} />,
-            badge: 'From £3 per asset',
+            badge: '£6–£50 per task',
         },
         {
             title: 'Priority Queue',
@@ -108,50 +108,6 @@ export function OfferingsPage() {
 }
 
 export function PricingPage() {
-    const tiers = [
-        {
-            name: 'Tier 1 — Tiny',
-            price: '£5–£12.50 per',
-            items: [
-                'Close (X) buttons',
-                'Cooldown indicators',
-            ],
-        },
-        {
-            name: 'Tier 2 — Small',
-            price: '£12.50–£25 per',
-            items: [
-                'Toggles',
-                'Sliders',
-                'Buttons with states',
-                'Simple pop‑ups / Notifications / tooltips',
-                'Basic chat / minimap frames',
-                'Box containers',
-            ],
-        },
-        {
-            name: 'Tier 3 — Medium',
-            price: '£35–£75 per',
-            items: [
-                'Health/Mana/XP Bars',
-                'Hotbars / quick‑slots',
-                'Simple inventory grids',
-                'Top bars',
-                'Leaderboard cells',
-            ],
-        },
-        {
-            name: 'Tier 4 — Large',
-            price: '£75–£150 per',
-            items: [
-                'Full system frames (shop, inventory, settings)',
-                'Leaderboards',
-                'Party/Guild UIs',
-                'Main menus',
-                'Full HUDs with hotbar, bars, etc',
-            ],
-        },
-    ]
     const perks = [
         'Free discovery chat',
         'Transparent quotes & scope',
@@ -171,67 +127,18 @@ export function PricingPage() {
     return (
         <Container size="lg">
             <Title order={1} ta="center" mb="xs">UI Design Commission Pricing</Title>
-            <Text ta="center" c="dimmed" mb="xl">Any style of UI, priced clearly with tier‑based rates and a simple inclusion rule.</Text>
+            <Text ta="center" c="dimmed" mb="xl">Any style of UI with simple, range‑based pricing. Quotes provided per scope.</Text>
 
             {/* One unified grid of panels for consistent alignment */}
             <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="xl" style={{ alignItems: 'stretch', gridAutoRows: '1fr' }}>
-                {/* Tier cards */}
-                {tiers.map((t, idx) => (
-                    <div key={t.name} className="price-card" style={{ ...glassLitePanel }}>
-                        <div className="card-head">
-                            <span className="icon-bubble">{idx === 0 ? '🌟' : idx === 1 ? '✨' : idx === 2 ? '💠' : '🏛️'}</span>
-                            <Title order={4} m={0}>{t.name}</Title>
-                            <span className="badge">{t.price}</span>
-                        </div>
-                        <ul className="tier-list">
-                            {t.items.map((it) => (<li key={it}>{it}</li>))}
-                        </ul>
-                    </div>
-                ))}
-
-                {/* Inclusion rule */}
-                <div className="price-card span-2" style={{ ...glassLitePanel }}>
-                    <div className="card-head">
-                        <span className="icon-bubble"><IconMathFunction size={16} /></span>
-                        <Title order={4} m={0}>Inclusion Rule (with math)</Title>
-                    </div>
-                    <Text c="dimmed" mb={8}>Higher‑tier assets may include lower‑tier elements at 75% off (pay 25% of base). This discount applies only when the smaller asset is required inside the larger one (e.g., a settings frame legitimately needs toggles, sliders, and box containers). Unrelated items don’t qualify. All reduced amounts are rounded to the nearest pound (£1).</Text>
-                    <ul className="rate-list">
-                        <li><strong>Tiny add‑on</strong>: £5–£12.50 × 25% = £1.25–£3.13</li>
-                        <li><strong>Small add‑on</strong>: £12.50–£25 × 25% = £3.13–£6.25</li>
-                        <li><strong>Medium add‑on</strong>: £35–£75 × 25% = £8.75–£18.75</li>
-                    </ul>
-                    <Text mt={8}>How it stacks:</Text>
-                    <ul className="rate-list">
-                        <li>Small can include Tiny at the reduced rate.</li>
-                        <li>Medium can include Small and Tiny at the reduced rate.</li>
-                        <li>Large can include Medium, Small, and Tiny at the reduced rate.</li>
-                    </ul>
-                </div>
-
-                {/* Examples */}
+                {/* UI Design range */}
                 <div className="price-card span-3" style={{ ...glassLitePanel }}>
                     <div className="card-head">
-                        <span className="icon-bubble"><IconCalculator size={16} /></span>
-                        <Title order={4} m={0}>Examples</Title>
+                        <span className="icon-bubble"><IconPalette size={16} /></span>
+                        <Title order={4} m={0}>UI Design Range</Title>
+                        <span className="badge">£10–£150 per task</span>
                     </div>
-                    <Text mb={6}><strong>Example A — Medium asset with extras</strong></Text>
-                    <ul className="rate-list">
-                        <li>Base: Medium (e.g., £60)</li>
-                        <li>Includes: 2 Small buttons + 3 Tiny icons</li>
-                        <li>Small add‑ons: 2 × (25% of £12.50–£25) = £6.25–£12.50 total</li>
-                        <li>Tiny add‑ons: 3 × (£1.25–£3.13) = £3.75–£9.39</li>
-                        <li><strong>Total</strong>: £60 + (£6.25–£12.50) + (£3.75–£9.39) = <strong>£70.00–£81.89</strong> → <em>Rounded</em>: <strong>£70–£82</strong></li>
-                    </ul>
-                    <Text mt={10} mb={6}><strong>Example B — Large system (shop) with sub‑elements</strong></Text>
-                    <ul className="rate-list">
-                        <li>Base: Large (e.g., £120)</li>
-                        <li>Includes: 1 Medium stat bar, 2 Small buttons, 4 Tiny indicators</li>
-                        <li>Medium add‑on: £12.50–£18.75</li>
-                        <li>Small add‑ons: 2 × (£3.13–£6.25) = £6.26–£12.50</li>
-                        <li>Tiny add‑ons: 4 × (£1.25–£3.13) = £5.00–£12.52</li>
-                        <li><strong>Total</strong>: £120 + (£12.50–£18.75) + (£6.26–£12.50) + (£5.00–£12.52) = <strong>£143.76–£163.77</strong> → <em>Rounded</em>: <strong>£144–£164</strong></li>
-                    </ul>
+                    <Text c="dimmed">Quoted per scope and complexity. Lower prices reflect sub‑tasks within larger tasks.</Text>
                 </div>
 
                 {/* Perks */}
@@ -256,7 +163,7 @@ export function PricingPage() {
                             <div key={d.label} className="discount-row"><span>{d.label}</span><span>{d.off}</span></div>
                         ))}
                     </div>
-                    <Text c="dimmed" size="sm" mt={6}>Discounts apply to base tier prices. Inclusion‑rule add‑ons are already reduced.</Text>
+                    <Text c="dimmed" size="sm" mt={6}>Discounts apply to the quoted total.</Text>
                 </div>
             </SimpleGrid>
 
@@ -264,26 +171,36 @@ export function PricingPage() {
             <Title order={1} ta="center" mt="xl" mb="xs">UI Import Commission Pricing</Title>
             <Text ta="center" c="dimmed" mb="xl">Accurate, clean in‑game imports for any style. Includes greyscaling, size checks, and fidelity pass.</Text>
             <SimpleGrid cols={{ base: 1, sm: 3 }} spacing="xl" style={{ alignItems: 'stretch', gridAutoRows: '1fr' }}>
-                <div className="price-card" style={{ ...glassLitePanel }}>
+                <div className="price-card span-3" style={{ ...glassLitePanel }}>
                     <div className="card-head">
                         <span className="icon-bubble"><IconCloud size={16} /></span>
-                        <Title order={4} m={0}>Tiny</Title>
-                        <span className="badge">£3–£7 per</span>
+                        <Title order={4} m={0}>UI Import Range</Title>
+                        <span className="badge">£6–£50 per task</span>
                     </div>
+                    <Text c="dimmed">Quoted per scope and complexity. Lower prices reflect sub‑tasks within larger tasks.</Text>
                 </div>
-                <div className="price-card" style={{ ...glassLitePanel }}>
+            </SimpleGrid>
+
+            {/* Payment section */}
+            <Title order={1} ta="center" mt="xl" mb="xs">Payment</Title>
+            <Text ta="center" c="dimmed" mb="xl">Pay securely via Stripe using cards and supported wallets.</Text>
+            <SimpleGrid cols={{ base: 1, sm: 3 }} spacing="xl" style={{ alignItems: 'stretch', gridAutoRows: '1fr' }}>
+                <div className="price-card span-3" style={{ ...glassLitePanel }}>
                     <div className="card-head">
-                        <span className="icon-bubble"><IconCloud size={16} /></span>
-                        <Title order={4} m={0}>Small</Title>
-                        <span className="badge">£7–£14 per</span>
+                        <span className="icon-bubble"><IconCreditCard size={16} /></span>
+                        <Title order={4} m={0}>Stripe Checkout</Title>
+                        <span className="badge">Secure</span>
                     </div>
-                </div>
-                <div className="price-card" style={{ ...glassLitePanel }}>
-                    <div className="card-head">
-                        <span className="icon-bubble"><IconCloud size={16} /></span>
-                        <Title order={4} m={0}>Medium & Large</Title>
-                        <span className="badge">£14–£26 per</span>
-                    </div>
+                    <Text c="dimmed">Use Stripe for a fast, encrypted checkout. You’ll receive confirmation immediately after payment.</Text>
+                    <a
+                        className="pay-button"
+                        href="https://buy.stripe.com/6oUaEZ9geg0p0Qm3X7aMU00"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Pay with Stripe"
+                    >
+                        Pay with Stripe
+                    </a>
                 </div>
             </SimpleGrid>
 
@@ -295,15 +212,14 @@ export function PricingPage() {
                 .card-head { display:flex; align-items:center; gap:10px; }
                 .icon-bubble { display:inline-grid; place-items:center; width:28px; height:28px; border-radius:8px; background: rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); font-size:14px; }
                 .badge { margin-left:auto; font-size:12px; padding:4px 10px; border-radius:9999px; background: rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); }
-                .tier-card { position: relative; }
-                .tier-card { transition: transform .22s ease, box-shadow .22s ease; }
-                .tier-card:hover { transform: translateY(-3px); box-shadow: 0 22px 55px rgba(0,0,0,.38); }
-                .tier-stripe { position:absolute; inset:0; background: linear-gradient(120deg, rgba(139,92,246,.10), rgba(167,139,250,.06)); mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); padding: 1px; border-radius: 12px; }
-                .tier-list { margin: 6px 0 0; padding-left: 18px; line-height: 1.5; }
-                .rate-list { margin: 6px 0 0; padding-left: 18px; line-height: 1.6; }
+                
                 .discounts { display: grid; grid-template-columns: 1fr auto; gap: 10px 18px; }
                 .discount-row { display: contents; }
-                .panel-head .head-icon { display:inline-grid; place-items:center; width:28px; height:28px; border-radius:8px; background: rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); font-size:14px; }
+
+                /* Payment button */
+                .pay-button { display:inline-block; align-self:flex-start; margin-top: 8px; padding: 10px 14px; border-radius: 9999px; background: rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); color:#fff; text-decoration:none; transition: transform .18s ease, box-shadow .18s ease, background .18s ease; box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 10px 28px rgba(0,0,0,.35); }
+                .pay-button:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 14px 36px rgba(0,0,0,.42); background: rgba(255,255,255,.18); }
+                .pay-button:active { transform: translateY(0); }
 
                 /* Mobile adjustments to prevent overflow and tighten spacing */
                 @media (max-width: 700px) {

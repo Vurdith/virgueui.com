@@ -146,7 +146,7 @@ export default function TopCenterNav() {
 				boxShadow: '0 0 40px 10px rgba(167,139,250,0.35) inset, 0 0 18px rgba(167,139,250,0.45)',
 			}} />
 			{leftItems.map((it) => (
-				<NavLink key={it.to} to={it.to} style={({ isActive }) => linkStyle(isActive)} className={({ isActive }) => `nav-pill ${isActive ? 'active' : ''}`}>
+				<NavLink key={it.to} to={it.to} aria-label={it.label} title={it.label} style={({ isActive }) => linkStyle(isActive)} className={({ isActive }) => `nav-pill ${isActive ? 'active' : ''}`}>
 					<span className="nav-icon" aria-hidden style={{ position: 'relative', zIndex: 2 }}>{iconFor(it.to)}</span>
 					<span className="nav-label" style={{ position: 'relative', zIndex: 2 }}>{it.label}</span>
 					{/* animated pulse ring */}
@@ -195,7 +195,7 @@ export default function TopCenterNav() {
 						/>
 					)
 				})}
-				<img src="https://media.discordapp.net/attachments/1106636246496841801/1406831874269122620/a85e88ca-c5d9-4231-9f8b-9aed1e08946a-anime-boy-in-a-purple-cloak-stunning-purple-anime-pfp-boys-2.png?ex=68a3e5c8&is=68a29448&hm=dad2218d2791251c22617977a655ceeba7fb5d551eae411ad9c5b5e549f23442&=&format=webp&quality=lossless" alt="Home Avatar" style={{ width: 44, height: 44, borderRadius: '9999px', position: 'relative', zIndex: 5 }} />
+				<img src="/favicon.png" alt="Home Avatar" style={{ width: 44, height: 44, borderRadius: '9999px', position: 'relative', zIndex: 5 }} />
 				{/* rotating gradient border ring above bars */}
 				<span className="pointer-events-none absolute inset-0" style={{
 					borderRadius: 9999,
@@ -217,7 +217,7 @@ export default function TopCenterNav() {
 				<span className="viz-shadow-top pointer-events-none" />
 			</NavLink>
 			{rightItems.map((it) => (
-				<NavLink key={it.to} to={it.to} style={({ isActive }) => linkStyle(isActive)} className={({ isActive }) => `nav-pill ${isActive ? 'active' : ''}`}>
+				<NavLink key={it.to} to={it.to} aria-label={it.label} title={it.label} style={({ isActive }) => linkStyle(isActive)} className={({ isActive }) => `nav-pill ${isActive ? 'active' : ''}`}>
 					<span className="nav-icon" aria-hidden style={{ position: 'relative', zIndex: 2 }}>{iconFor(it.to)}</span>
 					<span className="nav-label" style={{ position: 'relative', zIndex: 2 }}>{it.label}</span>
 					<span className="pointer-events-none absolute inset-0" style={{
@@ -245,9 +245,9 @@ export default function TopCenterNav() {
 			))}
 			<style>{`
 			/* base nav pill sizing set here (CSS, not inline) so media queries can override */
-			.tc-nav .nav-pill { font-size: 11px; padding: 6px 12px; flex: 0 0 auto; }
-			.nav-icon { display: none; }
-			.nav-label { display: inline; }
+			.tc-nav .nav-pill { font-size: 0; padding: 6px; width: 36px; height: 36px; border-radius: 9999px; flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; line-height: 0; }
+			.nav-icon { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; }
+			.nav-label { display: none; }
 			.nav-pill { transform: translateZ(0); transition: transform 240ms cubic-bezier(.2,.8,.2,1); will-change: transform; }
 			.nav-pill:hover,
 			.nav-pill.active,
@@ -304,6 +304,13 @@ export default function TopCenterNav() {
 			/* Active shadow overlay sits above visualizer */
 			.viz-shadow-top { position:absolute; inset:0; border-radius:9999px; box-shadow: 0 0 0 1px rgba(255,255,255,0.30), 0 10px 28px rgba(0,0,0,0.50), 0 0 32px rgba(167,139,250,0.65); opacity:0; transition:opacity .2s; z-index: 4; }
 			.nav-pill.active .viz-shadow-top { opacity: 1; }
+
+			/* Desktop and larger: use text buttons for non-home items */
+			@media (min-width: 768px) {
+			  .tc-nav .nav-pill:not(.home-circle) { font-size: 14px; line-height: 1; padding: 8px 14px; width: auto; height: 40px; border-radius: 9999px; }
+			  .tc-nav .nav-pill:not(.home-circle) .nav-label { display: inline; }
+			  .tc-nav .nav-pill:not(.home-circle) .nav-icon { display: none; }
+			}
 
 			/* Responsive nav: compress spacing and sizes on small screens */
 			@media (max-width: 640px) {

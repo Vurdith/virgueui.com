@@ -1,7 +1,7 @@
 import { Container, Title, Text, Stack } from '@mantine/core'
 
 export default function HomePage() {
-	const avatarUrl = 'https://media.discordapp.net/attachments/1106636246496841801/1406831874269122620/a85e88ca-c5d9-4231-9f8b-9aed1e08946a-anime-boy-in-a-purple-cloak-stunning-purple-anime-pfp-boys-2.png?ex=68a3e5c8&is=68a29448&hm=dad2218d2791251c22617977a655ceeba7fb5d551eae411ad9c5b5e549f23442&=&format=webp&quality=lossless'
+	const avatarUrl = '/favicon.png'
 	const baseApps = [
 		{ label: 'Ps', color: '#31A8FF', src: '/apps/photoshop.png' },
 		{ label: 'AD', color: '#1BB1FE', src: '/apps/affinity-designer.png' },

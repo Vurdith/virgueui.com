@@ -10,7 +10,7 @@ type PortfolioItem = {
 }
 
 const stock = [
-	'https://media.discordapp.net/attachments/1407100214011101286/1407100251952648295/korriban.png?ex=68a4dfba&is=68a38e3a&hm=a34d3331a55c39f3a01835435929352e57851040aba7fcbec09fd9f55a39acf9&=&format=webp&quality=lossless&width=2162&height=1216',
+	'/portfolio/korriban.png',
 ]
 
 const items: PortfolioItem[] = [
